@@ -36,6 +36,7 @@ def exploreOnly() -> int:
       sum4 += n4
     # Return the total happiness generated over the 200 days
     sum = sum1 + sum2 + sum3 + sum4
+    return sum
 
 
 def eGreedy(e=10) -> int:
