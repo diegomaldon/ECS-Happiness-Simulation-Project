@@ -13,12 +13,29 @@ def exploitOnly() -> int:
 
 def exploreOnly() -> int:
     # Visit each cafeteria the same number of times.
+    import random
+    sum1 = 0
+    sum2 = 0
+    sum3 = 0
+    sum4 = 0
     # 50 days, visit cafeteria 1 and generate a new happiness value
+    for i in range(50):
+      n1 = random.normalvariate(7,3)
+      sum1 += n1
     # 50 days, visit cafeteria 2 and generate a new happiness value
+    for i in range(50):
+      n2 = random.normalvariate(4,10)
+      sum2 += n2
     # 50 days, visit cafeteria 3 and generate a new happiness value
+    for i in range(50):
+      n3 = random.normalvariate(10,6)
+      sum3 += n3 
     # 50 days, visit cafeteria 4 and generate a new happiness value
+    for i in range(50):
+      n4 = random.normalvariate(5,2)
+      sum4 += n4
     # Return the total happiness generated over the 200 days
-    pass
+    sum = sum1 + sum2 + sum3 + sum4
 
 
 def eGreedy(e=10) -> int:
