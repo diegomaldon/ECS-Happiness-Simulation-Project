@@ -13,7 +13,6 @@ def exploitOnly() -> int:
 
 def exploreOnly() -> int:
     # Visit each cafeteria the same number of times.
-    import random
     sum1 = 0
     sum2 = 0
     sum3 = 0
@@ -53,11 +52,53 @@ def eGreedy(e=10) -> int:
 
 
 def simulation(t, e=10) -> None:
-    # Run a simulation of the three strategies (exploitOnly, exploreOnly, and eGreedy) t times
-    # Calculate the average total happiness generated over t trials
-    # For eGreedy, be sure to use the e values input into your simulation function!
-    # Print the Optimum Happiness followed by a new line
-    # For each of the strategies print a header with the strategy name followed by
-    # Expected total happiness • Expected regret
-    # Simulated total happiness • Simulated regret
-    pass
+   # Make a list of the simulated values for each trial
+    exploit_only = []
+    explore_only = []
+    e_greedy = []
+
+# Run a simulation of the three strategies (exploitOnly, exploreOnly, and eGreedy) t times & ADD VALUES TO LIST
+    for i in range(t):
+        val_of_exploit = exploitOnly()
+        exploit_only.append(val_of_exploit)
+
+        val_of_explore = exploreOnly()
+        explore_only.append(val_of_explore)
+
+        val_of_e_greedy = eGreedy(e)
+        e_greedy.append(val_of_e_greedy)
+
+# Calculate the average total happiness generated over t trials
+    avg_exploit_only = statistics.mean(exploit_only)
+    avg_explore_only = statistics.mean(explore_only)
+    avg_e_greedy = statistics.mean(e_greedy)
+
+# Calculate expected and simulated values:
+    expected_happiness = total_days * avg_happiness
+    expected_regret = optimum_happiness - total_happiness_value
+    simulated_happiness = avg_e_greedy + avg_explore_only + avg_exploit_only
+    simulated_regret = optimum_happiness - simulated_total_happiness
+
+# Pretty print
+    print("Optimum Happiness: " + str(optimum_happiness))
+    print()
+
+    print("Explore Only: ")
+    print("Expected Happiness: " + str(expected_happiness))
+    print("Expected Regret: " + str(expected_regret))
+    print("Simulated Happiness: " + str(simulated_happiness))
+    print("Simulated Regret: " + str(simulated_regret))
+    print()
+
+    print("Exploit Only: ")
+    print("Expected Happiness: " + str(expected_happiness))
+    print("Expected Regret: " + str(expected_regret))
+    print("Simulated Happiness: " + str(simulated_happiness))
+    print("Simulated Regret: " + str(simulated_regret))
+    print()
+
+    print("eGreedy: ")
+    print("Expected Happiness: " + str(expected_happiness))
+    print("Expected Regret: " + str(expected_regret))
+    print("Simulated Happiness: " + str(simulated_happiness))
+    print("Simulated Regret: " + str(simulated_regret))
