@@ -1,4 +1,11 @@
 import random
+import statistics
+
+
+total_days = 200
+happiness_value = [7, 4, 10, 5]
+deviation_values = [3, 10, 6, 2]
+optimum_happiness = max(happiness_value) * total_days
 
 
 def exploitOnly() -> int:
