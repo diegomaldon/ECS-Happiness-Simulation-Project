@@ -58,8 +58,13 @@ def eGreedy(e=10) -> int:
     pass
 
 
-def simulation(t, e=10) -> None:
-   # Make a list of the simulated values for each trial
+def truncate(n, decimals=0):
+    multiplier = 10 ** decimals
+    return int(n * multiplier) / multiplier
+
+
+def simulation(t: int, e=10) -> None:
+    # Make a list of the simulated values for each trial
     exploit_only = []
     explore_only = []
     e_greedy = []
@@ -81,31 +86,47 @@ def simulation(t, e=10) -> None:
     avg_e_greedy = statistics.mean(e_greedy)
 
 # Calculate expected and simulated values:
-    expected_happiness = total_days * avg_happiness
-    expected_regret = optimum_happiness - total_happiness_value
-    simulated_happiness = avg_e_greedy + avg_explore_only + avg_exploit_only
-    simulated_regret = optimum_happiness - simulated_total_happiness
+    expr_expected_happiness = (50 * (happiness_value[0] + happiness_value[1] + happiness_value[2] + happiness_value[3]))
+    expr_expected_regret = optimum_happiness - expr_expected_happiness
+    expr_simulated_happiness = avg_explore_only
+    expr_simulated_regret = optimum_happiness - expr_simulated_happiness
 
-# Pretty print
-    print("Optimum Happiness: " + str(optimum_happiness))
+    expl_expected_happiness = ((196 * max(happiness_value))
+                               + happiness_value[0] + happiness_value[1] + happiness_value[2] + happiness_value[3])
+    expl_expected_regret = optimum_happiness - expl_expected_happiness
+    expl_simulated_happiness = avg_exploit_only
+    expl_simulated_regret = optimum_happiness - expl_simulated_happiness
+
+    grd_expected_happiness = (((((100 - e) / 100) * total_days) * max(happiness_value))
+                              + (((e / 400) * total_days) * happiness_value[0])
+                              + (((e / 400) * total_days) * happiness_value[1])
+                              + (((e / 400) * total_days) * happiness_value[2])
+                              + (((e / 400) * total_days) * happiness_value[3]))
+    grd_expected_regret = optimum_happiness - grd_expected_happiness
+    grd_simulated_happiness = avg_e_greedy
+    grd_simulated_regret = optimum_happiness - grd_simulated_happiness
+
+
+# Print expected and simulated values (rounded to 2 decimal places) for each method
+    print("Optimum Happiness: " + str("%.2f" % optimum_happiness))
     print()
 
     print("Explore Only: ")
-    print("Expected Happiness: " + str(expected_happiness))
-    print("Expected Regret: " + str(expected_regret))
-    print("Simulated Happiness: " + str(simulated_happiness))
-    print("Simulated Regret: " + str(simulated_regret))
+    print("Expected Happiness: " + str("%.2f" % expr_expected_happiness))
+    print("Expected Regret: " + str(truncate(expr_expected_regret, 2)))
+    print("Simulated Happiness: " + str(truncate(expr_simulated_happiness, 2)))
+    print("Simulated Regret: " + str(truncate(expr_simulated_regret, 2)))
     print()
 
     print("Exploit Only: ")
-    print("Expected Happiness: " + str(expected_happiness))
-    print("Expected Regret: " + str(expected_regret))
-    print("Simulated Happiness: " + str(simulated_happiness))
-    print("Simulated Regret: " + str(simulated_regret))
+    print("Expected Happiness: " + str("%.2f" % expl_expected_happiness))
+    print("Expected Regret: " + str(truncate(expl_expected_regret, 2)))
+    print("Simulated Happiness: " + str(truncate(expl_simulated_happiness, 2)))
+    print("Simulated Regret: " + str(truncate(expl_simulated_regret, 2)))
     print()
 
     print("eGreedy: ")
-    print("Expected Happiness: " + str(expected_happiness))
-    print("Expected Regret: " + str(expected_regret))
-    print("Simulated Happiness: " + str(simulated_happiness))
-    print("Simulated Regret: " + str(simulated_regret))
+    print("Expected Happiness: " + str("%.2f" % grd_expected_happiness))
+    print("Expected Regret: " + str(truncate(grd_expected_regret, 2)))
+    print("Simulated Happiness: " + str(truncate(grd_simulated_happiness, 2)))
+    print("Simulated Regret: " + str(truncate(grd_simulated_regret, 2)))
