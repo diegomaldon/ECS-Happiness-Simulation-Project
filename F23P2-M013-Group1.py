@@ -7,15 +7,40 @@ happiness_value = [7, 4, 10, 5]
 deviation_values = [3, 10, 6, 2]
 optimum_happiness = max(happiness_value) * total_days
 
+def exploitOnly() -> float:
+    sum = 0
+    visit_c1 = random.normalvariate(7, 3) #creates random happiness level for first cafeteria- 1st day
+    visit_c2 = random.normalvariate(4, 10) #creates random happiness level for second cafeteria- 2nd day
+    visit_c3 = random.normalvariate(10, 6) #creates random happiness level for third cafeteria- 3rd day
+    visit_c4 = random.normalvariate(5,2) #creates random happiness level for fourth cafeteria- 4th day
+    max_happiness = max(visit_c1, visit_c2, visit_c3, visit_c4) #takes max happiness level between 4 cafeterias
+    # adds happiness levels for first 4 days to sum
+    sum += visit_c1
+    sum += visit_c2
+    sum += visit_c3
+    sum += visit_c4
+    
+# if c1 has max happiness value, go to c1 next 196 days and add happiness levels for each day to sum
+    if max_happiness == visit_c1: 
+        for i in range(196):
+            sum += random.normalvariate(7, 3)
+            
+# if c2 has max happiness value, go to c2 next 196 days and add happiness levels for each day to sum
+    elif max_happiness == visit_c2:
+        for i in range(196):
+            sum += random.normalvariate(4, 10)
+            
+# if c3 has max happiness value, go to c3 next 196 days and add happiness levels for each day to sum
+    elif max_happiness == visit_c3:
+        for i in range(196):
+            sum += random.normalvariate(10, 6)
 
-def exploitOnly() -> int:
-    # First four days, visit each cafeteria
-    # Generate happiness values for each of the four cafeterias
-    # Pick the one that returned the best happiness value
-    # Visit only that cafeteria for the next 196 days.
-    # Each day generate a new happiness value for that cafeteria.
-    # Return the total happiness generated over the 200 days
-    pass
+    # if c4 has max happiness value, go to c4 next 196 days and add happiness levels for each day to sum
+    elif max_happiness == visit_c4:
+        for i in range(196):
+            sum += random.normalvariate(5,2)
+
+    return sum
 
 
 def exploreOnly() -> int:
