@@ -46,16 +46,87 @@ def exploreOnly() -> int:
 
 
 def eGreedy(e=10) -> int:
-    # Take input value of e (between 0 and 100)
-    # Defaults to 10 if no value is given when the function is called
-    # First four days, visit each cafeteria
-    # Generate happiness values for each of the four cafeterias
-    # Next 196 days pick a cafeteria to visit and generate happiness
-    # Visit best-so-far cafeteria 100-e% of the time
-    # This means you need to be keeping track of the average happiness
-    # generated for each cafeteria for the full 200 days! • Visit random cafeteria e% of the time
-    # Return the total happiness generated over the 200 days
-    pass
+ # mean and deviation c1
+    m1 = 7
+    d1 = 4
+    # mean and deviation c2
+    m2 = 4
+    d2 = 10
+    # mean and deviation c3
+    m3 = 10
+    d3 = 6
+    # mean and deviation c4
+    m4 = 5
+    d4 = 2
+    # visit cafeteria 1
+    c1 = rand.normalvariate(m1, d1)
+    # visit cafeteria 2
+    c2 = rand.normalvariate(m2, d2)
+    # visit cafeteria 3
+    c3 = rand.normalvariate(m3, d3)
+    # visit cafeteria 4
+    c4 = rand.normalvariate(m4, d4)
+    total_happiness = c1 + c2 + c3 + c4
+    if c1 > c2 and c1 > c3 and c1 > c4:
+        Best_Mean = m1
+        Best_Dev = d1
+    elif c2 > c1 and c2 > c3 and c2 > c4:
+        Best_Mean = m2
+        Best_Dev = d2
+    elif c3 > c1 and c3 > c2 and c3 > c4:
+        Best_Mean = m3
+        Best_Dev = d3
+    else:
+        Best_Mean = m4
+        Best_Dev = d4
+    day = 1
+    cafe1 = 1
+    cafe2 = 1
+    cafe3 = 1
+    cafe4 = 1
+    for i in range(196):
+        r = rand.random(0, 1)
+        if r < (e / 100):
+            # pick random
+            which_one = rand.randint(1, 4)
+            if which_one == 1:
+                dayhappiness = rand.normalvariate(m1, d1)
+                c1 += dayhappiness
+                cafe1 += 1
+            elif which_one == 2:
+                dayhappiness = rand.normalvariate(m2, d2)
+                c2 += dayhappiness
+                cafe2 += 1
+            elif which_one == 3:
+                dayhappiness = rand.normalvariate(m3, d3)
+                c3 += dayhappiness
+                cafe3 += 1
+            else:
+                dayhappiness = rand.normalvariate(m4, d4)
+                c4 += dayhappiness
+                cafe4 += 1
+
+        else:
+            dayhappiness = rand.normalvariate(Best_Mean, Best_Dev)
+        avghap1 = c1 / cafe1
+        avghap2 = c2 / cafe2
+        avghap3 = c3 / cafe3
+        avghap4 = c4 / cafe4
+        if avghap1 > avghap2 and avghap1 > avghap3 and avghap1 > avghap4:
+            Best_Mean = m1
+            Best_Dev = d1
+        elif avghap2 > avghap1 and avghap2 > avghap3 and avghap2 > avghap4:
+            Best_Mean = m2
+            Best_Dev = d2
+        elif avghap3 > avghap1 and avghap3 > avghap2 and avghap3 > avghap4:
+            Best_Mean = m3
+            Best_Dev = d3
+        elif avghap4 > avghap1 and avghap4 > avghap3 and avghap4 > avghap2:
+            Best_Mean = m4
+            Best_Dev = d4
+        total_happiness += dayhappiness
+        day += 1
+    return total_happiness
 
 
 def truncate(n, decimals=0):
