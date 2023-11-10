@@ -51,19 +51,19 @@ def exploreOnly() -> int:
     sum4 = 0
     # 50 days, visit cafeteria 1 and generate a new happiness value
     for i in range(50):
-      n1 = random.normalvariate(7,3)
+      n1 = random.normalvariate(happiness_value[0], deviation_values[0])
       sum1 += n1
     # 50 days, visit cafeteria 2 and generate a new happiness value
     for i in range(50):
-      n2 = random.normalvariate(4,10)
+      n2 = random.normalvariate(happiness_value[1], deviation_values[1])
       sum2 += n2
     # 50 days, visit cafeteria 3 and generate a new happiness value
     for i in range(50):
-      n3 = random.normalvariate(10,6)
+      n3 = random.normalvariate(happiness_value[2], deviation_values[2])
       sum3 += n3 
     # 50 days, visit cafeteria 4 and generate a new happiness value
     for i in range(50):
-      n4 = random.normalvariate(5,2)
+      n4 = random.normalvariate(happiness_value[3], deviation_values[3])
       sum4 += n4
     # Return the total happiness generated over the 200 days
     sum = sum1 + sum2 + sum3 + sum4
