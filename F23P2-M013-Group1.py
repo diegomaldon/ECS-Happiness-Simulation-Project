@@ -1,49 +1,49 @@
 import random
 import statistics
 
-
 total_days = 200
 happiness_value = [7, 4, 10, 5]
 deviation_values = [3, 10, 6, 2]
 optimum_happiness = max(happiness_value) * total_days
 
+
 def exploitOnly() -> float:
-    sum = 0
-    visit_c1 = random.normalvariate(7, 3) #creates random happiness level for first cafeteria- 1st day
-    visit_c2 = random.normalvariate(4, 10) #creates random happiness level for second cafeteria- 2nd day
-    visit_c3 = random.normalvariate(10, 6) #creates random happiness level for third cafeteria- 3rd day
-    visit_c4 = random.normalvariate(5,2) #creates random happiness level for fourth cafeteria- 4th day
-    max_happiness = max(visit_c1, visit_c2, visit_c3, visit_c4) #takes max happiness level between 4 cafeterias
+    total = 0
+    visit_c1 = random.normalvariate(7, 3)  # creates random happiness level for first cafeteria - 1st day
+    visit_c2 = random.normalvariate(4, 10)  # creates random happiness level for second cafeteria - 2nd day
+    visit_c3 = random.normalvariate(10, 6)  # creates random happiness level for third cafeteria - 3rd day
+    visit_c4 = random.normalvariate(5, 2)  # creates random happiness level for fourth cafeteria - 4th day
+    max_happiness = max(visit_c1, visit_c2, visit_c3, visit_c4)  # takes max happiness level between 4 cafeterias
     # adds happiness levels for first 4 days to sum
-    sum += visit_c1
-    sum += visit_c2
-    sum += visit_c3
-    sum += visit_c4
-    
-# if c1 has max happiness value, go to c1 next 196 days and add happiness levels for each day to sum
-    if max_happiness == visit_c1: 
+    total += visit_c1
+    total += visit_c2
+    total += visit_c3
+    total += visit_c4
+
+    # if c1 has max happiness value, go to c1 next 196 days and add happiness levels for each day to sum
+    if max_happiness == visit_c1:
         for i in range(196):
-            sum += random.normalvariate(7, 3)
-            
-# if c2 has max happiness value, go to c2 next 196 days and add happiness levels for each day to sum
+            total += random.normalvariate(7, 3)
+
+    # if c2 has max happiness value, go to c2 next 196 days and add happiness levels for each day to sum
     elif max_happiness == visit_c2:
         for i in range(196):
-            sum += random.normalvariate(4, 10)
-            
-# if c3 has max happiness value, go to c3 next 196 days and add happiness levels for each day to sum
+            total += random.normalvariate(4, 10)
+
+    # if c3 has max happiness value, go to c3 next 196 days and add happiness levels for each day to sum
     elif max_happiness == visit_c3:
         for i in range(196):
-            sum += random.normalvariate(10, 6)
+            total += random.normalvariate(10, 6)
 
     # if c4 has max happiness value, go to c4 next 196 days and add happiness levels for each day to sum
     elif max_happiness == visit_c4:
         for i in range(196):
-            sum += random.normalvariate(5,2)
+            total += random.normalvariate(5, 2)
 
-    return sum
+    return total
 
 
-def exploreOnly() -> int:
+def exploreOnly() -> float:
     # Visit each cafeteria the same number of times.
     sum1 = 0
     sum2 = 0
@@ -51,27 +51,27 @@ def exploreOnly() -> int:
     sum4 = 0
     # 50 days, visit cafeteria 1 and generate a new happiness value
     for i in range(50):
-      n1 = random.normalvariate(happiness_value[0], deviation_values[0])
-      sum1 += n1
+        n1 = random.normalvariate(happiness_value[0], deviation_values[0])
+        sum1 += n1
     # 50 days, visit cafeteria 2 and generate a new happiness value
     for i in range(50):
-      n2 = random.normalvariate(happiness_value[1], deviation_values[1])
-      sum2 += n2
+        n2 = random.normalvariate(happiness_value[1], deviation_values[1])
+        sum2 += n2
     # 50 days, visit cafeteria 3 and generate a new happiness value
     for i in range(50):
-      n3 = random.normalvariate(happiness_value[2], deviation_values[2])
-      sum3 += n3 
-    # 50 days, visit cafeteria 4 and generate a new happiness value
+        n3 = random.normalvariate(happiness_value[2], deviation_values[2])
+        sum3 += n3
+        # 50 days, visit cafeteria 4 and generate a new happiness value
     for i in range(50):
-      n4 = random.normalvariate(happiness_value[3], deviation_values[3])
-      sum4 += n4
+        n4 = random.normalvariate(happiness_value[3], deviation_values[3])
+        sum4 += n4
     # Return the total happiness generated over the 200 days
-    sum = sum1 + sum2 + sum3 + sum4
-    return sum
+    total = sum1 + sum2 + sum3 + sum4
+    return total
 
 
-def eGreedy(e=10) -> int:
- # mean and deviation c1
+def eGreedy(e=10) -> float:
+    # mean and deviation c1
     m1 = 7
     d1 = 4
     # mean and deviation c2
@@ -84,79 +84,74 @@ def eGreedy(e=10) -> int:
     m4 = 5
     d4 = 2
     # visit cafeteria 1
-    c1 = rand.normalvariate(m1, d1)
+    c1 = random.normalvariate(m1, d1)
     # visit cafeteria 2
-    c2 = rand.normalvariate(m2, d2)
+    c2 = random.normalvariate(m2, d2)
     # visit cafeteria 3
-    c3 = rand.normalvariate(m3, d3)
+    c3 = random.normalvariate(m3, d3)
     # visit cafeteria 4
-    c4 = rand.normalvariate(m4, d4)
+    c4 = random.normalvariate(m4, d4)
     total_happiness = c1 + c2 + c3 + c4
     if c1 > c2 and c1 > c3 and c1 > c4:
-        Best_Mean = m1
-        Best_Dev = d1
+        best_mean = m1
+        best_dev = d1
     elif c2 > c1 and c2 > c3 and c2 > c4:
-        Best_Mean = m2
-        Best_Dev = d2
+        best_mean = m2
+        best_dev = d2
     elif c3 > c1 and c3 > c2 and c3 > c4:
-        Best_Mean = m3
-        Best_Dev = d3
+        best_mean = m3
+        best_dev = d3
     else:
-        Best_Mean = m4
-        Best_Dev = d4
+        best_mean = m4
+        best_dev = d4
     day = 1
     cafe1 = 1
     cafe2 = 1
     cafe3 = 1
     cafe4 = 1
     for i in range(196):
-        r = rand.random(0, 1)
+        r = random.random()
         if r < (e / 100):
             # pick random
-            which_one = rand.randint(1, 4)
+            which_one = random.randint(1, 4)
             if which_one == 1:
-                dayhappiness = rand.normalvariate(m1, d1)
-                c1 += dayhappiness
+                day_happiness = random.normalvariate(m1, d1)
+                c1 += day_happiness
                 cafe1 += 1
             elif which_one == 2:
-                dayhappiness = rand.normalvariate(m2, d2)
-                c2 += dayhappiness
+                day_happiness = random.normalvariate(m2, d2)
+                c2 += day_happiness
                 cafe2 += 1
             elif which_one == 3:
-                dayhappiness = rand.normalvariate(m3, d3)
-                c3 += dayhappiness
+                day_happiness = random.normalvariate(m3, d3)
+                c3 += day_happiness
                 cafe3 += 1
             else:
-                dayhappiness = rand.normalvariate(m4, d4)
-                c4 += dayhappiness
+                day_happiness = random.normalvariate(m4, d4)
+                c4 += day_happiness
                 cafe4 += 1
 
         else:
-            dayhappiness = rand.normalvariate(Best_Mean, Best_Dev)
-        avghap1 = c1 / cafe1
-        avghap2 = c2 / cafe2
-        avghap3 = c3 / cafe3
-        avghap4 = c4 / cafe4
-        if avghap1 > avghap2 and avghap1 > avghap3 and avghap1 > avghap4:
-            Best_Mean = m1
-            Best_Dev = d1
-        elif avghap2 > avghap1 and avghap2 > avghap3 and avghap2 > avghap4:
-            Best_Mean = m2
-            Best_Dev = d2
-        elif avghap3 > avghap1 and avghap3 > avghap2 and avghap3 > avghap4:
-            Best_Mean = m3
-            Best_Dev = d3
-        elif avghap4 > avghap1 and avghap4 > avghap3 and avghap4 > avghap2:
-            Best_Mean = m4
-            Best_Dev = d4
-        total_happiness += dayhappiness
+            day_happiness = random.normalvariate(best_mean, best_dev)
+        avg_hap1 = c1 / cafe1
+        avg_hap2 = c2 / cafe2
+        avg_hap3 = c3 / cafe3
+        avg_hap4 = c4 / cafe4
+        if avg_hap1 > avg_hap2 and avg_hap1 > avg_hap3 and avg_hap1 > avg_hap4:
+            best_mean = m1
+            best_dev = d1
+        elif avg_hap2 > avg_hap1 and avg_hap2 > avg_hap3 and avg_hap2 > avg_hap4:
+            best_mean = m2
+            best_dev = d2
+        elif avg_hap3 > avg_hap1 and avg_hap3 > avg_hap2 and avg_hap3 > avg_hap4:
+            best_mean = m3
+            best_dev = d3
+        elif avg_hap4 > avg_hap1 and avg_hap4 > avg_hap3 and avg_hap4 > avg_hap2:
+            best_mean = m4
+            best_dev = d4
+        total_happiness += day_happiness
         day += 1
     return total_happiness
-
-
-def truncate(n, decimals=0):
-    multiplier = 10 ** decimals
-    return int(n * multiplier) / multiplier
 
 
 def simulation(t: int, e=10) -> None:
@@ -165,7 +160,7 @@ def simulation(t: int, e=10) -> None:
     explore_only = []
     e_greedy = []
 
-# Run a simulation of the three strategies (exploitOnly, exploreOnly, and eGreedy) t times & ADD VALUES TO LIST
+    # Simulate the three strategies (exploitOnly, exploreOnly, and eGreedy) t times & ADD VALUES TO LIST
     for i in range(t):
         val_of_exploit = exploitOnly()
         exploit_only.append(val_of_exploit)
@@ -176,12 +171,12 @@ def simulation(t: int, e=10) -> None:
         val_of_e_greedy = eGreedy(e)
         e_greedy.append(val_of_e_greedy)
 
-# Calculate the average total happiness generated over t trials
+    # Calculate the average total happiness generated over t trials
     avg_exploit_only = statistics.mean(exploit_only)
     avg_explore_only = statistics.mean(explore_only)
     avg_e_greedy = statistics.mean(e_greedy)
 
-# Calculate expected and simulated values:
+    # Calculate expected and simulated values:
     expr_expected_happiness = (50 * (happiness_value[0] + happiness_value[1] + happiness_value[2] + happiness_value[3]))
     expr_expected_regret = optimum_happiness - expr_expected_happiness
     expr_simulated_happiness = avg_explore_only
@@ -202,27 +197,26 @@ def simulation(t: int, e=10) -> None:
     grd_simulated_happiness = avg_e_greedy
     grd_simulated_regret = optimum_happiness - grd_simulated_happiness
 
-
-# Print expected and simulated values (rounded to 2 decimal places) for each method
+    # Print expected and simulated values (rounded to 2 decimal places) for each method
     print("Optimum Happiness: " + str("%.2f" % optimum_happiness))
     print()
 
     print("Explore Only: ")
     print("Expected Happiness: " + str("%.2f" % expr_expected_happiness))
-    print("Expected Regret: " + str(truncate(expr_expected_regret, 2)))
-    print("Simulated Happiness: " + str(truncate(expr_simulated_happiness, 2)))
-    print("Simulated Regret: " + str(truncate(expr_simulated_regret, 2)))
+    print("Expected Regret: " + str("%.2f" % expr_expected_regret))
+    print("Simulated Happiness: " + str("%.2f" % expr_simulated_happiness))
+    print("Simulated Regret: " + str("%.2f" % expr_simulated_regret))
     print()
 
     print("Exploit Only: ")
     print("Expected Happiness: " + str("%.2f" % expl_expected_happiness))
-    print("Expected Regret: " + str(truncate(expl_expected_regret, 2)))
-    print("Simulated Happiness: " + str(truncate(expl_simulated_happiness, 2)))
-    print("Simulated Regret: " + str(truncate(expl_simulated_regret, 2)))
+    print("Expected Regret: " + str("%.2f" % expl_expected_regret))
+    print("Simulated Happiness: " + str("%.2f" % expl_simulated_happiness))
+    print("Simulated Regret: " + str("%.2f" % expl_simulated_regret))
     print()
 
     print("eGreedy: ")
     print("Expected Happiness: " + str("%.2f" % grd_expected_happiness))
-    print("Expected Regret: " + str(truncate(grd_expected_regret, 2)))
-    print("Simulated Happiness: " + str(truncate(grd_simulated_happiness, 2)))
-    print("Simulated Regret: " + str(truncate(grd_simulated_regret, 2)))
+    print("Expected Regret: " + str("%.2f" % grd_expected_regret))
+    print("Simulated Happiness: " + str("%.2f" % grd_simulated_happiness))
+    print("Simulated Regret: " + str("%.2f" % grd_simulated_regret))
